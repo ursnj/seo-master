@@ -33,7 +33,7 @@ npx sitemaper -w https://www.example.com -d 10 -o ./sitemap.xml -f daily
 
 ## 🖥 Future plans
 
-- Create a web application to automatically generate and submit sitemaps to search engines on a schedule.
+Create a web application to automatically generate and submit sitemaps to search engines on a schedule.
 
 ## 🤝 Contributing
 
