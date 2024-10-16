@@ -36,7 +36,6 @@ jobs:
 
       # Publish to npm if it's a new version and a tagged release
       - name: Publish to npm
-        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
