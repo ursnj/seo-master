@@ -2,6 +2,7 @@
   "name": "sitemaper",
   "version": "1.0.0",
   "description": "Simple tool for generating sitemaps for your website.",
+  "type": "module",
   "main": "./src/index.ts",
   "bin": {
     "sitemaper": "./dist/index.js"
@@ -16,6 +17,7 @@
     "axios": "^1.7.7",
     "cheerio": "^1.0.0",
     "commander": "^12.1.0",
+    "ora": "^8.1.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3",
     "xmlbuilder": "^15.1.1"

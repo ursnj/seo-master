@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import {crawlWebsite} from "./sitemaper";
+import {crawlWebsite} from "./sitemaper.js";
 const program = new Command();
 
 program
@@ -17,7 +17,7 @@ program
     const website = options.website || 'https://www.example.com';
     const depth = options.depth || 10;
     const output = options.output || './sitemap.xml';
-    console.log({website, depth, output});
+    // console.log({website, depth, output});
     crawlWebsite(website, depth, output);
   });
 

@@ -3,19 +3,20 @@ import * as cheerio from 'cheerio';
 import { writeFileSync } from 'fs';
 import { URL } from 'url';
 import xmlbuilder from 'xmlbuilder';
+import ora from 'ora'; // Import ora for loader
 
 // Set to store visited URLs
 const visited = new Set<string>();
 
 // Function to fetch and parse a URL
-const fetchAndParse = async (url: string, website: string): Promise<string[]> => {
+const fetchAndParse = async (url: string, website: string, spinner: any): Promise<string[]> => {
   try {
     const { data } = await axios.get(url);
     const $: any = cheerio.load(data);
     const links: string[] = [];
 
     // Extract links from <a> tags
-    $('a').each((_, element) => {
+    $('a').each((_: any, element: any) => {
       const href = $(element).attr('href');
       if (href) {
         const absoluteUrl = new URL(href, url).href;
@@ -27,9 +28,10 @@ const fetchAndParse = async (url: string, website: string): Promise<string[]> =>
       }
     });
 
+    spinner.text = `Found ${links.length} new links on ${url}`;
     return links;
   } catch (error) {
-    console.error(`Error fetching ${url}:`, (error as Error).message);
+    spinner.fail(`Error fetching ${url}: ${(error as Error).message}`);
     return [];
   }
 };
@@ -62,6 +64,8 @@ const generateSitemap = (urls: { url: string; depth: number }[], maxDepth: numbe
 
 // Main function to crawl and generate sitemap
 export const crawlWebsite = async (website: string, maxDepth: number, output: string): Promise<void> => {
+  const spinner = ora(`Crawling website: ${website}`).start(); // Start the spinner
+
   const queue: { url: string; depth: number }[] = [{ url: website, depth: 0 }];
   visited.add(website);
 
@@ -69,7 +73,7 @@ export const crawlWebsite = async (website: string, maxDepth: number, output: st
     const { url, depth } = queue.shift() as { url: string; depth: number };
 
     if (depth < maxDepth) {
-      const links = await fetchAndParse(url, website);
+      const links = await fetchAndParse(url, website, spinner);
 
       // Add links to the queue for the next level of crawling
       for (const link of links) {
@@ -91,5 +95,6 @@ export const crawlWebsite = async (website: string, maxDepth: number, output: st
 
   // Save the generated sitemap to a file
   writeFileSync(output, sitemapXml);
-  console.log(`Sitemap saved to ${output}`);
+
+  spinner.succeed(`Sitemap saved to ${output}`);
 };
