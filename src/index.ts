@@ -17,8 +17,9 @@ program
     const website = options.website || 'https://www.example.com';
     const depth = options.depth || 10;
     const output = options.output || './sitemap.xml';
-    // console.log({website, depth, output});
-    crawlWebsite(website, depth, output);
+    const changefreq = options.output || 'daily';
+    // console.log({website, depth, output, changefreq});
+    crawlWebsite(website, depth, output, changefreq);
   });
 
 program.parse(process.argv);

@@ -28,7 +28,7 @@ const fetchAndParse = async (url: string, website: string, spinner: any): Promis
       }
     });
 
-    spinner.text = `Found ${links.length} new links on ${url}`;
+    spinner.text = `Total links found ${visited.size}, Found ${links.length} new links on ${url}`;
     return links;
   } catch (error) {
     spinner.fail(`Error fetching ${url}: ${(error as Error).message}`);
@@ -37,7 +37,7 @@ const fetchAndParse = async (url: string, website: string, spinner: any): Promis
 };
 
 // Function to generate XML sitemap
-const generateSitemap = (urls: { url: string; depth: number }[], maxDepth: number): string => {
+const generateSitemap = (urls: { url: string; depth: number }[], maxDepth: number, changefreq: string): string => {
   const root = xmlbuilder
     .create('urlset', { version: '1.0', encoding: 'UTF-8' })
     .att('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9')
@@ -53,7 +53,7 @@ const generateSitemap = (urls: { url: string; depth: number }[], maxDepth: numbe
       .ele('url')
       .ele('loc', url)
       .up()
-      .ele('changefreq', 'weekly')
+      .ele('changefreq', changefreq)
       .up() // Set change frequency to weekly
       .ele('priority', priority.toFixed(1))
       .up(); // Set priority based on depth
@@ -63,7 +63,7 @@ const generateSitemap = (urls: { url: string; depth: number }[], maxDepth: numbe
 };
 
 // Main function to crawl and generate sitemap
-export const crawlWebsite = async (website: string, maxDepth: number, output: string): Promise<void> => {
+export const crawlWebsite = async (website: string, maxDepth: number, output: string, changefreq: string): Promise<void> => {
   const spinner = ora(`Crawling website: ${website}`).start(); // Start the spinner
 
   const queue: { url: string; depth: number }[] = [{ url: website, depth: 0 }];
@@ -91,7 +91,7 @@ export const crawlWebsite = async (website: string, maxDepth: number, output: st
     return { url, depth };
   });
 
-  const sitemapXml = generateSitemap(urlsWithDepth, maxDepth);
+  const sitemapXml = generateSitemap(urlsWithDepth, maxDepth, changefreq);
 
   // Save the generated sitemap to a file
   writeFileSync(output, sitemapXml);
