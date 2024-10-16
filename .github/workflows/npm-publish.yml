@@ -19,6 +19,10 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
+      # Add npm authentication for publishing
+      - name: Authenticate with npm
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
       # Install dependencies
       - name: Install dependencies
         run: npm install
