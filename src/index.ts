@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
+import {crawlWebsite} from "./sitemaper";
 const program = new Command();
 
 program
@@ -17,6 +18,7 @@ program
     const depth = options.depth || 10;
     const output = options.output || './sitemap.xml';
     console.log({website, depth, output});
+    crawlWebsite(website, depth, output);
   });
 
 program.parse(process.argv);
