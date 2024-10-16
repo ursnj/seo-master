@@ -1,6 +1,6 @@
 {
   "name": "sitemaper",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Simple tool for generating sitemaps for your website.",
   "type": "module",
   "main": "./src/index.ts",
