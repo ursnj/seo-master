@@ -1,0 +1,20 @@
+{
+  "name": "sitemaper",
+  "version": "1.0.0",
+  "description": "Simple tool for generating sitemaps for your website.",
+  "main": "./src/index.ts",
+  "bin": {
+    "sitemaper": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "author": "Niranjan Devasani",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^22.7.5",
+    "commander": "^12.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  }
+}
