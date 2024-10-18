@@ -19,6 +19,7 @@
 ```
 npx sitemaper generate -w https://www.nayanui.com
 ```
+
 ### Advanced generation Usage:
 
 ```
@@ -40,13 +41,12 @@ npx sitemaper generate -w http://localhost:3000 -r https://www.nayanui.com -d 10
 this case it crawl your localhost URL and replace it with replacement URL.
 
 | Parameter         | Default                 | Usage                                                                                                                                                                 |
-|-------------------|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ----------------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | --website / -w    | https://www.nayanui.com | Pass website base URL to start crawling.                                                                                                                              |
-| --replacer / -r   | ''                    | Pass replacement URL to replace crawled url, this will be mostly useful to crawl localhost and replace it with original URL.                                                                                                         |
+| --replacer / -r   | ''                      | Pass replacement URL to replace crawled url, this will be mostly useful to crawl localhost and replace it with original URL.                                          |
 | --depth / -d      | 10                      | Pass depth to let the generator know how depth it need to crawl.                                                                                                      |
 | --output / -o     | ./sitemap.xml           | Pass output to let the generator know where to keep generated sitemap.                                                                                                |
-| --changefreq / -f | daily                   | Pass change frequency to let the generator know how frequently your content change, possible options are ***always, hourly, daily, weekly, monthly, yearly, never***. |
-
+| --changefreq / -f | daily                   | Pass change frequency to let the generator know how frequently your content change, possible options are **_always, hourly, daily, weekly, monthly, yearly, never_**. |
 
 ### Sitemap validation usage:
 
@@ -60,9 +60,9 @@ You can also use the shorter version of this command.
 npx sitemaper validate -o ./sitemap.xml
 ```
 
-| Parameter         | Default                 | Usage                                                                       |
-|-------------------|-------------------------|-----------------------------------------------------------------------------|
-| --output / -o     | ./sitemap.xml           | Pass output to let the generator know where to find and validate sitemap.   |
+| Parameter     | Default       | Usage                                                                     |
+| ------------- | ------------- | ------------------------------------------------------------------------- |
+| --output / -o | ./sitemap.xml | Pass output to let the generator know where to find and validate sitemap. |
 
 ## 🕹 Programatic Usage
 
@@ -73,7 +73,7 @@ import { generateSitemap, validateSitemap } from 'sitemaper';
 
 generateSitemap('https://www.nayanui.com', '', 10, './sitemap.xml', 'daily');
 
-validateSitemap('./sitemap.xml'); 
+validateSitemap('./sitemap.xml');
 
 ```
 

@@ -11,7 +11,8 @@
     "sitemaper": "./dist/index.js"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "format": "npx prettier --write --print-width 150 ."
   },
   "author": "Niranjan Devasani",
   "license": "ISC",
