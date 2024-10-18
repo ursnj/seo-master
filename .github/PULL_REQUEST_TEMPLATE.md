@@ -13,7 +13,6 @@ Fixes # [ISSUE_NUMBER]
 - [ ] Bug fix
 - [ ] New feature
 - [ ] Documentation update
-- [ ] Refactoring
 
 ## Checklist
 

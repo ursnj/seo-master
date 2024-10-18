@@ -1,5 +1,5 @@
 ---
-name: Simple Issue
+name: Sitemaper Issue
 about: Report a bug or request a feature
 title: ''
 labels: ''
