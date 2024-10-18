@@ -106,7 +106,9 @@ export const generateSitemap = async (website: string, replacer: string, maxDept
 };
 
 // Function to validate the sitemap file
-export const validateSitemap = async (sitemapPath: string): Promise<boolean> => {
+export const validateSitemap = async (sitemapPath: string): Promise<{ status: boolean, message: string }> => {
+  const spinner = ora(`Validating sitemap: ${sitemapPath}`).start(); // Start the spinner
+
   try {
     const sitemapContent = readFileSync(sitemapPath, 'utf-8');
 
@@ -120,6 +122,7 @@ export const validateSitemap = async (sitemapPath: string): Promise<boolean> => 
 
     // Validate each <url> entry
     result.urlset.url.forEach((entry: any) => {
+      spinner.text = `Total links found ${result.urlset.url.length}, Validating ${entry.loc || entry.loc[0]}`;
       if (!entry.loc || !entry.loc[0]) {
         throw new Error("Invalid sitemap: Each <url> must contain a <loc> element.");
       }
@@ -140,10 +143,12 @@ export const validateSitemap = async (sitemapPath: string): Promise<boolean> => 
       }
     });
 
-    console.log('Sitemap is valid.');
-    return true;
+    const message = `Sitemap is valid: ${sitemapPath}`;
+    spinner.succeed(message);
+    return { status: true, message: message };
   } catch (error: any) {
-    console.error('Sitemap validation error:', error.message);
-    return false;
+    const message = `Sitemap validation error: ${error.message}`;
+    spinner.fail(message)
+    return { status: true, message: message };
   }
 };
