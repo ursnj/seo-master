@@ -50,6 +50,7 @@ this case it crawl your localhost URL and replace it with replacement URL.
 ## 🕹 Programatic Usage
 
 You can also use Sitemaper programmatically with Node.js. Check out the implementation below.
+
 ```
 import { generateSitemap, validateSitemap } from 'sitemaper';
 
