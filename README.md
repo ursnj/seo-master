@@ -63,7 +63,7 @@ validateSitemap('./sitemap.xml');
 ## 🖥 Future plans
 
 - [x] Create Sitemaper CLI tool to generate sitemaps efficiently.
-- [x] Create Sitemaper programatic API's to generate sitemaps efficiently.
+- [x] Create Sitemaper programmatic API's to generate sitemaps efficiently.
 - [ ] Support multiple sitemaps if website is bigger than certain limit.
 - [ ] Create a web application to automatically generate and submit sitemaps to search engines on a schedule.
 
