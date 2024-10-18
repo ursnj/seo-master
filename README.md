@@ -12,16 +12,23 @@
 - 📦 Customizable Output Path.
 - 🎨 Flexible Change Frequency.
 
-## 🕹 Usage
+## 🕹 CLI Usage
+
+### Simple usage:
 
 ```
-npx sitemaper --website https://www.example.com --depth 10 --output ./sitemap.xml --changefreq daily
+npx sitemaper -w https://www.nayanui.com
+```
+### Advanced Usage:
+
+```
+npx sitemaper --website https://www.nayanui.com --depth 10 --output ./sitemap.xml --changefreq daily
 ```
 
 You can also use the shorter version of this command.
 
 ```
-npx sitemaper -w https://www.example.com -d 10 -o ./sitemap.xml -f daily
+npx sitemaper -w https://www.nayanui.com -d 10 -o ./sitemap.xml -f daily
 ```
 
 You can also integrate Sitemaper with your localhost to generate sitemaps without any deployments.
@@ -34,15 +41,28 @@ this case it crawl your localhost URL and replace it with replacement URL.
 
 | Parameter         | Default                 | Usage                                                                                                                                                                 |
 |-------------------|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| --website / -w    | https://www.example.com | Pass website base URL to start crawling.                                                                                                                              |
-| --replacer / -r   | ''                      | Pass replacement URL to replace crawled url, this will be mostly useful to crawl localhost and replace it with original URL.                                                                                                         |
+| --website / -w    | https://www.nayanui.com | Pass website base URL to start crawling.                                                                                                                              |
+| --replacer / -r   | ''                    | Pass replacement URL to replace crawled url, this will be mostly useful to crawl localhost and replace it with original URL.                                                                                                         |
 | --depth / -d      | 10                      | Pass depth to let the generator know how depth it need to crawl.                                                                                                      |
 | --output / -o     | ./sitemap.xml           | Pass output to let the generator know where to keep generated sitemap.                                                                                                |
 | --changefreq / -f | daily                   | Pass change frequency to let the generator know how frequently your content change, possible options are ***always, hourly, daily, weekly, monthly, yearly, never***. |
 
+## 🕹 Programatic Usage
+
+You can also use Sitemaper programmatically with Node.js. Check out the implementation below.
+```
+import { generateSitemap, validateSitemap } from 'sitemaper';
+
+generateSitemap('https://www.nayanui.com', '', 10, './sitemap.xml', 'daily');
+
+validateSitemap('./sitemap.xml'); 
+
+```
+
 ## 🖥 Future plans
 
-Create a web application to automatically generate and submit sitemaps to search engines on a schedule.
+- Support multiple sitemaps if website is bigger than certain limit.
+- Create a web application to automatically generate and submit sitemaps to search engines on a schedule.
 
 ## 🤝 Contributing
 

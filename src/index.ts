@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import { crawlWebsite } from "./sitemaper.js";
+import { generateSitemap, validateSitemap } from "./sitemaper.js";
 import { existsSync } from 'fs';
 import { URL } from 'url';
 
@@ -65,7 +65,9 @@ program
 
       // console.log({ website, replacer, depth, output, changefreq });
 
-      crawlWebsite(website, replacer, depth, output, changefreq);
+      return generateSitemap(website, replacer, depth, output, changefreq);
   });
+
+export { generateSitemap, validateSitemap };
 
 program.parse(process.argv);

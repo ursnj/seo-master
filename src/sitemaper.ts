@@ -1,7 +1,9 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
-import { writeFileSync } from 'fs';
+import {readFileSync, writeFileSync} from 'fs';
 import { URL } from 'url';
+// @ts-ignore
+import { parseStringPromise } from 'xml2js';
 import xmlbuilder from 'xmlbuilder';
 import ora from 'ora'; // Import ora for loader
 
@@ -37,7 +39,7 @@ const fetchAndParse = async (url: string, website: string, spinner: any): Promis
 };
 
 // Function to generate XML sitemap
-const generateSitemap = (urls: { url: string; depth: number }[], maxDepth: number, changefreq: string, website: string, replacer: string): string => {
+const buildSitemap = (urls: { url: string; depth: number }[], maxDepth: number, changefreq: string, website: string, replacer: string): string => {
   const root = xmlbuilder
     .create('urlset', { version: '1.0', encoding: 'UTF-8' })
     .att('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9')
@@ -67,7 +69,7 @@ const generateSitemap = (urls: { url: string; depth: number }[], maxDepth: numbe
 };
 
 // Main function to crawl and generate sitemap
-export const crawlWebsite = async (website: string, replacer: string, maxDepth: number, output: string, changefreq: string): Promise<void> => {
+export const generateSitemap = async (website: string, replacer: string, maxDepth: number, output: string, changefreq: string): Promise<void> => {
   const spinner = ora(`Crawling website: ${website}`).start(); // Start the spinner
 
   const queue: { url: string; depth: number }[] = [{ url: website, depth: 0 }];
@@ -95,10 +97,53 @@ export const crawlWebsite = async (website: string, replacer: string, maxDepth: 
     return { url, depth };
   });
 
-  const sitemapXml = generateSitemap(urlsWithDepth, maxDepth, changefreq, website, replacer);
+  const sitemapXml = buildSitemap(urlsWithDepth, maxDepth, changefreq, website, replacer);
 
   // Save the generated sitemap to a file
   writeFileSync(output, sitemapXml);
 
   spinner.succeed(`Sitemap saved to ${output}`);
+};
+
+// Function to validate the sitemap file
+export const validateSitemap = async (sitemapPath: string): Promise<boolean> => {
+  try {
+    const sitemapContent = readFileSync(sitemapPath, 'utf-8');
+
+    // Parse the XML sitemap
+    const result = await parseStringPromise(sitemapContent);
+
+    // Check if root is <urlset>
+    if (!result.urlset || !Array.isArray(result.urlset.url)) {
+      throw new Error("Invalid sitemap: Root element must be <urlset>.");
+    }
+
+    // Validate each <url> entry
+    result.urlset.url.forEach((entry: any) => {
+      if (!entry.loc || !entry.loc[0]) {
+        throw new Error("Invalid sitemap: Each <url> must contain a <loc> element.");
+      }
+
+      // Validate URL format
+      try {
+        new URL(entry.loc[0]);
+      } catch {
+        throw new Error(`Invalid URL format in sitemap: ${entry.loc[0]}`);
+      }
+
+      // Optionally validate changefreq and priority (if they exist)
+      if (entry.changefreq && !['always', 'hourly', 'daily', 'weekly', 'monthly', 'yearly', 'never'].includes(entry.changefreq[0])) {
+        throw new Error(`Invalid <changefreq> value: ${entry.changefreq[0]}`);
+      }
+      if (entry.priority && (isNaN(entry.priority[0]) || entry.priority[0] < 0 || entry.priority[0] > 1)) {
+        throw new Error(`Invalid <priority> value: ${entry.priority[0]}`);
+      }
+    });
+
+    console.log('Sitemap is valid.');
+    return true;
+  } catch (error: any) {
+    console.error('Sitemap validation error:', error.message);
+    return false;
+  }
 };
