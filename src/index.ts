@@ -52,18 +52,20 @@ program
 
 program
   .option('-w, --website <url>', 'The URL of the website to crawl', validateWebsite)
+  .option('-r, --replacer <url>', 'The URL of the website to be replaced', validateWebsite)
   .option('-d, --depth <number>', 'Depth of the website to crawl', validateDepth)
   .option('-o, --output <path>', 'Output path for the sitemap.xml', validateOutput)
   .option('-f, --changefreq <value>', 'Change frequency for the sitemap (always, hourly, daily, weekly, monthly, yearly, never)', validateChangefreq)
   .action((options) => {
       const website = options.website || 'https://www.example.com';
+      const replacer = options.replacer || '';
       const depth = options.depth || 10;
       const output = options.output || './sitemap.xml';
       const changefreq = options.changefreq || 'daily';
 
-      // console.log({ website, depth, output, changefreq });
+      // console.log({ website, replacer, depth, output, changefreq });
 
-      crawlWebsite(website, depth, output, changefreq);
+      crawlWebsite(website, replacer, depth, output, changefreq);
   });
 
 program.parse(process.argv);

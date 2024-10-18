@@ -1,9 +1,12 @@
 {
   "name": "sitemaper",
   "version": "1.0.0",
+  "private": false,
+  "sideEffects": false,
   "description": "Simple tool for generating sitemaps for your website.",
   "type": "module",
   "main": "./src/index.ts",
+  "homepage": "https://www.nayanui.com/devtools/sitemaper",
   "bin": {
     "sitemaper": "./dist/index.js"
   },
@@ -21,5 +24,33 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3",
     "xmlbuilder": "^15.1.1"
+  },,
+  "files": [
+    "/dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ursnj/sitemaper"
+  },
+  "keywords": [
+    "Sitemap Generator",
+    "Free Sitemap Generator",
+    "XML Sitemap Generator",
+    "Automated Sitemap Generator",
+    "Website Sitemap Generator",
+    "Sitemap Generator for SEO",
+    "Online Sitemap Generator",
+    "Easy Sitemap Generator",
+    "Sitemap Generator for WordPress",
+    "Sitemap XML Creator",
+    "Simple Sitemap Generator",
+    "Sitemap Scraper",
+    "Sitemaper"
+  ],
+  "bugs": {
+    "url": "https://github.com/ursnj/sitemaper/issues"
   }
 }

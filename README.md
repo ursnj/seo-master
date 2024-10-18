@@ -24,9 +24,18 @@ You can also use the shorter version of this command.
 npx sitemaper -w https://www.example.com -d 10 -o ./sitemap.xml -f daily
 ```
 
+You can also integrate Sitemaper with your localhost to generate sitemaps without any deployments.
+
+```
+npx sitemaper -w http://localhost:3000 -r https://www.nayanui.com -d 10 -o ./sitemap.xml -f daily
+```
+
+this case it crawl your localhost URL and replace it with replacement URL.
+
 | Parameter         | Default                 | Usage                                                                                                                                                                 |
 |-------------------|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | --website / -w    | https://www.example.com | Pass website base URL to start crawling.                                                                                                                              |
+| --replacer / -r   | ''                      | Pass replacement URL to replace crawled url, this will be mostly useful to crawl localhost and replace it with original URL.                                                                                                         |
 | --depth / -d      | 10                      | Pass depth to let the generator know how depth it need to crawl.                                                                                                      |
 | --output / -o     | ./sitemap.xml           | Pass output to let the generator know where to keep generated sitemap.                                                                                                |
 | --changefreq / -f | daily                   | Pass change frequency to let the generator know how frequently your content change, possible options are ***always, hourly, daily, weekly, monthly, yearly, never***. |
