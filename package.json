@@ -1,9 +1,9 @@
 {
   "name": "sitemaper",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": false,
   "sideEffects": false,
-  "description": "Simple tool for generating sitemaps for your website.",
+  "description": "Sitemaper is a powerful sitemap generator designed to simplify the process of creating accurate and efficient sitemaps for websites. It crawls through your site, maps its structure, and generates an optimized sitemap, helping improve SEO and site visibility.",
   "type": "module",
   "main": "./src/index.ts",
   "homepage": "https://www.nayanui.com/devtools/sitemaper",
@@ -11,7 +11,8 @@
     "sitemaper": "./dist/index.js"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "format": "npx prettier --write --print-width 150 ."
   },
   "author": "Niranjan Devasani",
   "license": "ISC",
@@ -23,6 +24,7 @@
     "ora": "^8.1.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3",
+    "xml2js": "^0.6.2",
     "xmlbuilder": "^15.1.1"
   },
   "files": [
