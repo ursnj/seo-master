@@ -1,6 +1,6 @@
 {
-  "name": "sitemaper",
-  "version": "1.2.0",
+  "name": "seo-master",
+  "version": "1.0.0",
   "private": false,
   "sideEffects": false,
   "description": "Sitemaper is a powerful sitemap generator designed to simplify the process of creating accurate and efficient sitemaps for websites. It crawls through your site, maps its structure, and generates an optimized sitemap, helping improve SEO and site visibility.",
@@ -8,7 +8,7 @@
   "main": "./src/index.ts",
   "homepage": "https://www.nayanui.com/devtools/sitemaper",
   "bin": {
-    "sitemaper": "./dist/index.js"
+    "seo-master": "./dist/index.js"
   },
   "scripts": {
     "build": "tsc",
@@ -46,11 +46,7 @@
     "Sitemap Generator for SEO",
     "Online Sitemap Generator",
     "Easy Sitemap Generator",
-    "Sitemap Generator for WordPress",
-    "Sitemap XML Creator",
-    "Simple Sitemap Generator",
-    "Sitemap Scraper",
-    "Sitemaper"
+    "Simple Sitemap Generator"
   ],
   "bugs": {
     "url": "https://github.com/ursnj/sitemaper/issues"
