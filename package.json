@@ -6,7 +6,7 @@
   "description": "Sitemaper is a powerful sitemap generator designed to simplify the process of creating accurate and efficient sitemaps for websites. It crawls through your site, maps its structure, and generates an optimized sitemap, helping improve SEO and site visibility.",
   "type": "module",
   "main": "./src/index.ts",
-  "homepage": "https://www.nayanui.com/devtools/sitemaper",
+  "homepage": "https://www.nayanui.com/devtools/seo-master",
   "bin": {
     "seo-master": "./dist/index.js"
   },
@@ -35,7 +35,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ursnj/sitemaper"
+    "url": "https://github.com/ursnj/seo-master"
   },
   "keywords": [
     "Sitemap Generator",
@@ -48,6 +48,6 @@
     "Simple Sitemap Generator"
   ],
   "bugs": {
-    "url": "https://github.com/ursnj/sitemaper/issues"
+    "url": "https://github.com/ursnj/seo-master/issues"
   }
 }
