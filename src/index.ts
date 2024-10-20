@@ -4,6 +4,7 @@ import { readFileSync } from "fs";
 import { Command } from "commander";
 import { generateSitemap, validateSitemap } from "./sitemaper.js";
 import { validateChangefreq, validateDepth, validateOutput, validateWebsite } from "./utils.js";
+import {generateImages} from "./images.js";
 const { name, version, description } = JSON.parse(readFileSync("./package.json", "utf8"));
 
 const program = new Command();
@@ -52,6 +53,17 @@ validate
     const output = options.output || "./sitemap.xml";
     validateSitemap(output);
   });
+
+
+create
+  .command("images")
+  .description("Create images for your website.")
+  .option("-i, --image <path>", "Input path of source image", validateOutput)
+  .action((options) => {
+    const image = options.image || "";
+    generateImages(image);
+  });
+
 
 export { generateSitemap, validateSitemap };
 
