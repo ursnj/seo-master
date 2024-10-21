@@ -32,7 +32,7 @@ You can also use the shorter version of this command.
 npx seo-master create sitemap -w https://www.nayanui.com -d 10 -o ./sitemap.xml -f daily
 ```
 
-You can also integrate Sitemaper with your localhost to generate sitemaps without any deployments.
+You can also integrate seo-master with your localhost to generate sitemaps without any deployments.
 
 ```
 npx seo-master create sitemap -w http://localhost:3000 -r https://www.nayanui.com -d 10 -o ./sitemap.xml -f daily
@@ -74,4 +74,4 @@ npx seo-master validate sitemap -o ./sitemap.xml
 
 ## 🤝 Contributing
 
-We welcome all contributions. You can submit any ideas as [Pull Requests](https://github.com/ursnj/sitemaper/pulls) or as [GitHub Issues](https://github.com/ursnj/sitemaper/issues). If you'd like to improve code, check out the Development Instructions and have a good time! :)
+We welcome all contributions. You can submit any ideas as [Pull Requests](https://github.com/ursnj/seo-master/pulls) or as [GitHub Issues](https://github.com/ursnj/seo-master/issues). If you'd like to improve code, check out the Development Instructions and have a good time! :)
