@@ -2,7 +2,7 @@
 
 import { readFileSync } from "fs";
 import { Command } from "commander";
-import { generateSitemap, validateSitemap } from "./sitemaper.js";
+import { generateSitemap, validateSitemap } from "./sitemaps.js";
 import { validateChangefreq, validateDepth, validateOutput, validateWebsite } from "./utils.js";
 import {generateImages} from "./images.js";
 const { name, version, description } = JSON.parse(readFileSync("./package.json", "utf8"));
@@ -59,12 +59,13 @@ create
   .command("images")
   .description("Create images for your website.")
   .option("-i, --image <path>", "Input path of source image", validateOutput)
+  .option("-o, --output <path>", "Output directory path for generated images", validateOutput)
   .action((options) => {
     const image = options.image || "";
-    generateImages(image);
+    const directory = options.image || "./icons";
+    generateImages(image, directory);
   });
 
-
-export { generateSitemap, validateSitemap };
+export { generateSitemap, validateSitemap, generateImages };
 
 program.parse(process.argv);

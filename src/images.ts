@@ -1,6 +1,7 @@
 import sharp from 'sharp';
 import * as fs from 'fs';
 import path from 'path';
+import ora from "ora";
 
 // Define common sizes for favicons and icons
 const iconSizes = [
@@ -17,8 +18,8 @@ const iconSizes = [
 ];
 
 // Function to generate icons of different sizes
-export async function generateImages(image: string) {
-  const outputDirectory = './icons';
+export async function generateImages(image: string, outputDirectory: string = './icons') {
+  const spinner = ora(`Generating images for: ${image}`).start(); // Start the spinner
 
   try {
     // Create the output directory if it doesn't exist
@@ -32,7 +33,7 @@ export async function generateImages(image: string) {
       await sharp(image)
         .resize(size, size)
         .toFile(outputPath);
-      console.log(`Generated ${name} (${size}x${size})`);
+      spinner.text = `Generated ${name} (${size}x${size})`;
     }
 
     // Generate favicon.ico (combination of multiple sizes)
@@ -41,9 +42,9 @@ export async function generateImages(image: string) {
       .resize(16, 16)
       .toFormat('ico' as any)
       .toFile(faviconOutputPath);
-    console.log('Generated favicon.ico');
+    spinner.succeed(`Generated images successfully.`);
 
-  } catch (error) {
-    console.error('Error generating icons:', error);
+  } catch (error: any) {
+    spinner.fail(`Error generating images: ${error.message}`);
   }
 }

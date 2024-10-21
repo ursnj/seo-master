@@ -5,7 +5,7 @@ import { URL } from "url";
 // @ts-ignore
 import { parseStringPromise } from "xml2js";
 import xmlbuilder from "xmlbuilder";
-import ora from "ora"; // Import ora for loader
+import ora from "ora";
 
 // Set to store visited URLs
 const visited = new Set<string>();
