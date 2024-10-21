@@ -5,11 +5,13 @@
 ## Related Issue
 
 <!-- Please link to the issue here or write "None" if no issue is related. -->
+
 Fixes # [ISSUE_NUMBER]
 
 ## Type of Change
 
 <!-- Please delete options that are not relevant. -->
+
 - [ ] Bug fix
 - [ ] New feature
 - [ ] Documentation update

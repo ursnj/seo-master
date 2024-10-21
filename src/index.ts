@@ -4,7 +4,8 @@ import { readFileSync } from "fs";
 import { Command } from "commander";
 import { generateSitemap, validateSitemap } from "./sitemaps.js";
 import { validateChangefreq, validateDepth, validateOutput, validateWebsite } from "./utils.js";
-import {generateImages} from "./images.js";
+import { generateImages } from "./images.js";
+import { generateMetaData } from "./metadata.js";
 const { name, version, description } = JSON.parse(readFileSync("./package.json", "utf8"));
 
 const program = new Command();
@@ -17,12 +18,14 @@ program
     this.help();
   });
 
-const create = program.command("create")
+const create = program
+  .command("create")
   .description("Create SEO Tools")
   .action(function (this: Command) {
     this.help();
   });
-const validate = program.command("validate")
+const validate = program
+  .command("validate")
   .description("Validate SEO Tools")
   .action(function (this: Command) {
     this.help();
@@ -54,7 +57,6 @@ validate
     validateSitemap(output);
   });
 
-
 create
   .command("images")
   .description("Create images for your website.")
@@ -66,6 +68,13 @@ create
     generateImages(image, directory);
   });
 
-export { generateSitemap, validateSitemap, generateImages };
+create
+  .command("metadata")
+  .description("Create metadata for your website.")
+  .action(() => {
+    generateMetaData();
+  });
+
+export { generateSitemap, validateSitemap, generateImages, generateMetaData };
 
 program.parse(process.argv);
