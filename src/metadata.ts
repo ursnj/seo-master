@@ -1,4 +1,6 @@
 import { writeFileSync } from "fs";
+import axios from "axios";
+import * as cheerio from "cheerio";
 import ora from "ora";
 
 // Dummy data
@@ -68,4 +70,61 @@ export const generateMetaData = () => {
   const htmlContent = `<!DOCTYPE html>\n<html lang="en">\n<head>\n<title>${title}</title>\n${metaHTML}\n<link rel="canonical" href="${url}">\n${iconHTML}\n</head>\n<body></body>\n</html>`;
   writeFileSync(filePath, htmlContent);
   spinner.succeed(`Metadata created at ${filePath}`);
+};
+
+// Function to crawl the website and check if all required tags exist
+export const validateMetadata = async (url: string) => {
+  const spinner = ora(`Validating SEO metadata for: ${url}`).start(); // Start the spinner
+// List of required meta tags
+  const requiredTags = [
+    { name: "meta[charset]", selector: "meta[charset]" },
+    { name: "meta[viewport]", selector: "meta[name='viewport']" },
+    { name: "meta[title]", selector: "title" },
+    { name: "meta[description]", selector: "meta[name='description']" },
+    { name: "meta[keywords]", selector: "meta[name='keywords']" },
+    { name: "meta[canonical]", selector: "link[rel='canonical']" },
+    { name: "meta[robots]", selector: "meta[name='robots']" },
+
+    // Open Graph (og:) tags
+    { name: "meta[og:title]", selector: "meta[property='og:title']" },
+    { name: "meta[og:description]", selector: "meta[property='og:description']" },
+    { name: "meta[og:type]", selector: "meta[property='og:type']" },
+    { name: "meta[og:url]", selector: "meta[property='og:url']" },
+    { name: "meta[og:image]", selector: "meta[property='og:image']" },
+
+    // Twitter tags
+    { name: "meta[twitter:card]", selector: "meta[name='twitter:card']" },
+    { name: "meta[twitter:title]", selector: "meta[name='twitter:title']" },
+    { name: "meta[twitter:description]", selector: "meta[name='twitter:description']" },
+    { name: "meta[twitter:image]", selector: "meta[name='twitter:image']" },
+
+    // Favicon and Apple Touch Icon
+    { name: "link[favicon]", selector: "link[rel='icon'], link[rel='shortcut icon']" },
+    { name: "link[apple-touch-icon]", selector: "link[rel='apple-touch-icon']" }
+  ];
+  try {
+    // Fetch the website content
+    const { data } = await axios.get(url);
+
+    // Load the website content into cheerio for parsing
+    const $: any = cheerio.load(data);
+
+    // Array to collect missing tags
+    const missingTags: string[] = [];
+
+    // Validate each required tag
+    requiredTags.forEach(tag => {
+      if (!$(tag.selector).length) {
+        missingTags.push(tag.name);
+      }
+    });
+
+    if (missingTags.length > 0) {
+      spinner.fail(`Missing tags on ${url}: ` + missingTags.join(", "));
+    } else {
+      spinner.succeed(`All required tags are present on ${url}`);
+    }
+  } catch (error: any) {
+    spinner.fail(`Error while fetching the website: ${error.message}`);
+  }
 };

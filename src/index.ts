@@ -5,7 +5,7 @@ import { Command } from "commander";
 import { generateSitemap, validateSitemap } from "./sitemaps.js";
 import { validateChangefreq, validateDepth, validateOutput, validateWebsite } from "./utils.js";
 import { generateImages } from "./images.js";
-import { generateMetaData } from "./metadata.js";
+import {generateMetaData, validateMetadata} from "./metadata.js";
 const { name, version, description } = JSON.parse(readFileSync("./package.json", "utf8"));
 
 const program = new Command();
@@ -75,6 +75,15 @@ create
     generateMetaData();
   });
 
-export { generateSitemap, validateSitemap, generateImages, generateMetaData };
+validate
+  .command("metadata")
+  .description("Validate SEO metadata for the given website")
+  .option("-w, --website <url>", "The URL of the website to crawl", validateWebsite)
+  .action((options) => {
+    const website = options.website || "";
+    validateMetadata(website);
+  });
+
+export { generateSitemap, validateSitemap, generateImages, generateMetaData, validateMetadata };
 
 program.parse(process.argv);
