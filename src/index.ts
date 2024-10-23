@@ -6,6 +6,7 @@ import { generateSitemap, validateSitemap } from "./sitemaps.js";
 import { validateChangefreq, validateDepth, validateOutput, validateWebsite } from "./utils.js";
 import { generateImages } from "./images.js";
 import {generateMetaData, validateMetadata} from "./metadata.js";
+import { generateRobots, validateRobots } from "./robots.js";
 const { name, version, description } = JSON.parse(readFileSync("./package.json", "utf8"));
 
 const program = new Command();
@@ -58,6 +59,30 @@ validate
   });
 
 create
+  .command("robots")
+  .description("Create robots.txt for your website.")
+  .option("-a, --allowed <path>", "Allowed paths for the robot.txt", validateOutput)
+  .option("-d, --disallowed <path>", "Disallowed paths for the robot.txt", validateOutput)
+  .option("-s, --sitemap <path>", "Sitemap url for the robot.txt", validateWebsite)
+  .option("-o, --output <path>", "Output path for the robot.txt", validateOutput)
+  .action((options) => {
+    const allowed = options.allowed || "";
+    const disallowed = options.disallowed || "";
+    const sitemap = options.sitemap || "";
+    const output = options.output || "./robots.txt";
+    generateRobots(allowed, disallowed, sitemap, output);
+  });
+
+validate
+  .command("robots")
+  .description("Validate robots.txt for your website.")
+  .option("-o, --output <path>", "Output path for the robot.txt", validateOutput)
+  .action((options) => {
+    const output = options.output || "./robots.txt";
+    validateRobots(output);
+  });
+
+create
   .command("images")
   .description("Create images for your website.")
   .option("-i, --image <path>", "Input path of source image", validateOutput)
@@ -84,6 +109,6 @@ validate
     validateMetadata(website);
   });
 
-export { generateSitemap, validateSitemap, generateImages, generateMetaData, validateMetadata };
+export { generateSitemap, validateSitemap, generateImages, generateMetaData, validateMetadata, generateRobots, validateRobots };
 
 program.parse(process.argv);
