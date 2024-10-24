@@ -2,11 +2,11 @@
 
 import { readFileSync } from "fs";
 import { Command } from "commander";
-import { generateSitemap, validateSitemap } from "./sitemaps.js";
-import { validateChangefreq, validateDepth, validateOutput, validateWebsite } from "./utils.js";
 import { generateImages } from "./images.js";
+import { generateSitemap, validateSitemap } from "./sitemaps.js";
 import {generateMetaData, validateMetadata} from "./metadata.js";
 import { generateRobots, validateRobots } from "./robots.js";
+import { validateChangefreq, validateDepth, validateOutput, validateWebsite } from "./utils.js";
 const { name, version, description } = JSON.parse(readFileSync("./package.json", "utf8"));
 
 const program = new Command();
