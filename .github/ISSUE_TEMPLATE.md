@@ -15,11 +15,3 @@ A clear and concise description of the issue or feature request.
 1. Go to '...'
 2. Click on '...'
 3. See the error
-
-## Expected Behavior
-
-What you expected to happen.
-
-## Additional Context
-
-Any other details or context.
