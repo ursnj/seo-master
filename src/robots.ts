@@ -1,4 +1,4 @@
-import { writeFileSync } from 'fs';
+import {readFileSync, writeFileSync} from 'fs';
 import axios from 'axios';
 import ora from "ora";
 
@@ -34,15 +34,18 @@ export const generateRobots = (allowed: string = '', disallowed: string = '', si
 };
 
 // Function to validate robots.txt file
-export const validateRobots = async (url: string): Promise<void> => {
+export const validateRobots = async (url: string, isRemote: boolean): Promise<void> => {
   const spinner = ora(`Generating images for: ${url}`).start(); // Start the spinner
 
-  try {
-    // Fetch the robots.txt file from the provided URL
-    const response = await axios.get(url);
+  let robotsTxtContent;
 
-    // Get the content of the robots.txt file
-    const robotsTxtContent: string = response.data;
+  try {
+    if (isRemote) {
+      const response = await axios.get(url);
+      robotsTxtContent = response.data;
+    } else {
+      robotsTxtContent = readFileSync(url, "utf-8");
+    }
 
     // Check if the required fields are present
     const hasUserAgent: boolean = /User-agent:/.test(robotsTxtContent);

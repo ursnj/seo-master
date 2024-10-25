@@ -103,11 +103,18 @@ export const generateSitemap = async (website: string, replacer: string, maxDept
 };
 
 // Function to validate the sitemap file
-export const validateSitemap = async (sitemapPath: string): Promise<{ status: boolean; message: string }> => {
+export const validateSitemap = async (sitemapPath: string, isRemote: boolean): Promise<{ status: boolean; message: string }> => {
   const spinner = ora(`Validating sitemap: ${sitemapPath}`).start(); // Start the spinner
 
+  let sitemapContent;
+
   try {
-    const sitemapContent = readFileSync(sitemapPath, "utf-8");
+    if (isRemote) {
+      const response = await axios.get(sitemapPath);
+      sitemapContent = response.data;
+    } else {
+      sitemapContent = readFileSync(sitemapPath, "utf-8");
+    }
 
     // Parse the XML sitemap
     const result = await parseStringPromise(sitemapContent);

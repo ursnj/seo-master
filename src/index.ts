@@ -53,18 +53,20 @@ validate
   .command("sitemap")
   .description("Validate an existing sitemap")
   .option("-o, --output <path>", "Output path for the sitemap.xml", validateOutput)
+  .option("-r, --isremote <path>", "Pass true if robots.txt is hosted somewhere.", validateOutput)
   .action((options) => {
     const output = options.output || "./sitemap.xml";
-    validateSitemap(output);
+    const isRemote = options.isremote || false;
+    validateSitemap(output, isRemote);
   });
 
 create
   .command("robots")
   .description("Create robots.txt for your website.")
-  .option("-a, --allowed <path>", "Allowed paths for the robot.txt", validateOutput)
-  .option("-d, --disallowed <path>", "Disallowed paths for the robot.txt", validateOutput)
-  .option("-s, --sitemap <path>", "Sitemap url for the robot.txt", validateWebsite)
-  .option("-o, --output <path>", "Output path for the robot.txt", validateOutput)
+  .option("-a, --allowed <path>", "Allowed paths for the robots.txt", validateOutput)
+  .option("-d, --disallowed <path>", "Disallowed paths for the robots.txt", validateOutput)
+  .option("-s, --sitemap <path>", "Sitemap url for the robots.txt", validateWebsite)
+  .option("-o, --output <path>", "Output path for the robots.txt", validateOutput)
   .action((options) => {
     const allowed = options.allowed || "";
     const disallowed = options.disallowed || "";
@@ -76,10 +78,12 @@ create
 validate
   .command("robots")
   .description("Validate robots.txt for your website.")
-  .option("-o, --output <path>", "Output path for the robot.txt", validateOutput)
+  .option("-o, --output <path>", "Output path for the robots.txt", validateOutput)
+  .option("-r, --isremote <path>", "Pass true if robots.txt is hosted somewhere.", validateOutput)
   .action((options) => {
     const output = options.output || "./robots.txt";
-    validateRobots(output);
+    const isRemote = options.isremote || false;
+    validateRobots(output, isRemote);
   });
 
 create
