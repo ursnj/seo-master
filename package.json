@@ -3,12 +3,18 @@
   "version": "1.0.0",
   "private": false,
   "sideEffects": false,
-  "description": "Sitemaper is a powerful sitemap generator designed to simplify the process of creating accurate and efficient sitemaps for websites. It crawls through your site, maps its structure, and generates an optimized sitemap, helping improve SEO and site visibility.",
+  "description": "SEO Master is a powerful all-in-one tool developed to boost your website's visibility and rankings. With features like automatic sitemap generation, customizable robots.txt creation, SEO-optimized metadata, Image assets generation and seamless integration with major search engines.",
   "type": "module",
   "main": "./src/index.ts",
-  "homepage": "https://www.nayanui.com/devtools/sitemaper",
+  "homepage": "https://www.nayanui.com/devtools/seo-master",
   "bin": {
     "seo-master": "./dist/index.js"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
   },
   "scripts": {
     "build": "tsc",
@@ -22,6 +28,7 @@
     "cheerio": "^1.0.0",
     "commander": "^12.1.0",
     "ora": "^8.1.0",
+    "sharp": "^0.33.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3",
     "xml2js": "^0.6.2",
@@ -35,19 +42,27 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ursnj/sitemaper"
+    "url": "https://github.com/ursnj/seo-master"
   },
   "keywords": [
     "Sitemap Generator",
+    "Sitemap Validator",
     "Free Sitemap Generator",
     "XML Sitemap Generator",
     "Automated Sitemap Generator",
     "Website Sitemap Generator",
     "Online Sitemap Generator",
     "Easy Sitemap Generator",
-    "Simple Sitemap Generator"
+    "Simple Sitemap Generator",
+    "Robots.txt Generator",
+    "Robots.txt Validator",
+    "Meta Tags Generator",
+    "Meta Tags Validator",
+    "Favicon Generator",
+    "Website Assets Generator",
+    "Social Media Metatags"
   ],
   "bugs": {
-    "url": "https://github.com/ursnj/sitemaper/issues"
+    "url": "https://github.com/ursnj/seo-master/issues"
   }
 }
