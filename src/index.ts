@@ -41,7 +41,7 @@ create
   .option("-o, --output <path>", "Output path for the sitemap.xml", validateOutput)
   .option("-f, --changefreq <value>", "Change frequency for the sitemap (always, hourly, daily, weekly, monthly, yearly, never)", validateChangefreq)
   .action((options) => {
-    const website = options.website || "https://www.nayanui.com";
+    const website = options.website || "";
     const replacer = options.replacer || "";
     const depth = options.depth || 10;
     const output = options.output || "./sitemap.xml";
