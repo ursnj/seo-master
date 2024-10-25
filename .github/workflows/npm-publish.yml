@@ -31,13 +31,6 @@ jobs:
       - name: Build the project
         run: npm run build
 
-      # Verify version change in package.json
-      - name: Check if version has changed
-        id: version-check
-        run: |
-          NEW_VERSION=$(node -p "require('./package.json').version")
-          echo "new_version=$NEW_VERSION" >> $GITHUB_ENV
-
       # Publish to npm if it's a new version and a tagged release
       - name: Publish to npm
         run: npm publish
