@@ -1,14 +1,14 @@
-import {readFileSync, writeFileSync} from 'fs';
-import axios from 'axios';
+import { readFileSync, writeFileSync } from "fs";
+import axios from "axios";
 import ora from "ora";
 
 // Function to generate robots.txt
-export const generateRobots = (allowed: string = '', disallowed: string = '', sitemap: string = '', output: string): void => {
+export const generateRobots = (allowed: string = "", disallowed: string = "", sitemap: string = "", output: string): void => {
   const spinner = ora(`Generating robots.txt for: ${output}`).start(); // Start the spinner
 
   // Split comma-separated values into arrays
-  const disallow: string[] = disallowed ? disallowed.split(',').map(item => item.trim()) : [''];
-  const allow: string[] = allowed ? allowed.split(',').map(item => item.trim()) : [];
+  const disallow: string[] = disallowed ? disallowed.split(",").map((item) => item.trim()) : [""];
+  const allow: string[] = allowed ? allowed.split(",").map((item) => item.trim()) : [];
 
   // Start creating the content of the robots.txt file
   let robotsContent: string = `User-agent: *\n`;

@@ -75,7 +75,7 @@ export const generateMetaTags = () => {
 // Function to crawl the website and check if all required tags exist
 export const validateMetaTags = async (url: string) => {
   const spinner = ora(`Validating SEO metadata for: ${url}`).start(); // Start the spinner
-// List of required meta tags
+  // List of required meta tags
   const requiredTags = [
     { name: "meta[charset]", selector: "meta[charset]" },
     { name: "meta[viewport]", selector: "meta[name='viewport']" },
@@ -100,7 +100,7 @@ export const validateMetaTags = async (url: string) => {
 
     // Favicon and Apple Touch Icon
     { name: "link[favicon]", selector: "link[rel='icon'], link[rel='shortcut icon']" },
-    { name: "link[apple-touch-icon]", selector: "link[rel='apple-touch-icon']" }
+    { name: "link[apple-touch-icon]", selector: "link[rel='apple-touch-icon']" },
   ];
   try {
     // Fetch the website content
@@ -113,7 +113,7 @@ export const validateMetaTags = async (url: string) => {
     const missingTags: string[] = [];
 
     // Validate each required tag
-    requiredTags.forEach(tag => {
+    requiredTags.forEach((tag) => {
       if (!$(tag.selector).length) {
         missingTags.push(tag.name);
       }

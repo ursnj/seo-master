@@ -1,12 +1,12 @@
-#!/usr/bin/env node
+#!/usr/bin/env node --no-warnings
 
 import { Command } from "commander";
 import { generateImages } from "./images.js";
 import { generateSitemap, validateSitemap } from "./sitemaps.js";
-import {generateMetaTags, validateMetaTags} from "./metatags.js";
+import { generateMetaTags, validateMetaTags } from "./metatags.js";
 import { generateRobots, validateRobots } from "./robots.js";
 import { validateChangefreq, validateDepth, validateOutput, validateWebsite } from "./utils.js";
-import packageJSON from "../package.json" assert { type: 'json' };
+import packageJSON from "../package.json" assert { type: "json" };
 const { name, version, description } = packageJSON;
 
 const program = new Command();

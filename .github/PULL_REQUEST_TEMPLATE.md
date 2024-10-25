@@ -1,7 +1,5 @@
 ## Description
 
-
-
 ## Related Issue
 
 Fixes # [ISSUE_NUMBER]
