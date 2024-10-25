@@ -18,7 +18,7 @@ const iconSizes = [
 ];
 
 // Function to generate icons of different sizes
-export async function generateImages(image: string, outputDirectory: string = "./icons") {
+export async function generateImages(image: string, outputDirectory: string) {
   const spinner = ora(`Generating images for: ${image}`).start(); // Start the spinner
 
   try {

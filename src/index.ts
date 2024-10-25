@@ -4,7 +4,7 @@ import { readFileSync } from "fs";
 import { Command } from "commander";
 import { generateImages } from "./images.js";
 import { generateSitemap, validateSitemap } from "./sitemaps.js";
-import {generateMetaData, validateMetadata} from "./metadata.js";
+import {generateMetaTags, validateMetaTags} from "./metatags.js";
 import { generateRobots, validateRobots } from "./robots.js";
 import { validateChangefreq, validateDepth, validateOutput, validateWebsite } from "./utils.js";
 const { name, version, description } = JSON.parse(readFileSync("./package.json", "utf8"));
@@ -52,12 +52,12 @@ create
 validate
   .command("sitemap")
   .description("Validate an existing sitemap")
-  .option("-o, --output <path>", "Output path for the sitemap.xml", validateOutput)
-  .option("-r, --isremote <path>", "Pass true if robots.txt is hosted somewhere.", validateOutput)
+  .option("-i, --input <path>", "Input path for the sitemap.xml", validateOutput)
+  .option("-ir, --isremote <path>", "Pass true if robots.txt is hosted somewhere.", validateOutput)
   .action((options) => {
-    const output = options.output || "./sitemap.xml";
+    const input = options.input || "./sitemap.xml";
     const isRemote = options.isremote || false;
-    validateSitemap(output, isRemote);
+    validateSitemap(input, isRemote);
   });
 
 create
@@ -78,12 +78,28 @@ create
 validate
   .command("robots")
   .description("Validate robots.txt for your website.")
-  .option("-o, --output <path>", "Output path for the robots.txt", validateOutput)
-  .option("-r, --isremote <path>", "Pass true if robots.txt is hosted somewhere.", validateOutput)
+  .option("-i, --input <path>", "Input path for the robots.txt", validateOutput)
+  .option("-ir, --isremote <path>", "Pass true if robots.txt is hosted somewhere.", validateOutput)
   .action((options) => {
-    const output = options.output || "./robots.txt";
+    const input = options.input || "./robots.txt";
     const isRemote = options.isremote || false;
-    validateRobots(output, isRemote);
+    validateRobots(input, isRemote);
+  });
+
+create
+  .command("metadata")
+  .description("Create metadata for your website.")
+  .action(() => {
+    generateMetaTags();
+  });
+
+validate
+  .command("metadata")
+  .description("Validate SEO metadata for the given website")
+  .option("-w, --website <url>", "The URL of the website to crawl", validateWebsite)
+  .action((options) => {
+    const website = options.website || "";
+    validateMetaTags(website);
   });
 
 create
@@ -93,26 +109,10 @@ create
   .option("-o, --output <path>", "Output directory path for generated images", validateOutput)
   .action((options) => {
     const image = options.image || "";
-    const directory = options.image || "./icons";
+    const directory = options.image || "./images";
     generateImages(image, directory);
   });
 
-create
-  .command("metadata")
-  .description("Create metadata for your website.")
-  .action(() => {
-    generateMetaData();
-  });
-
-validate
-  .command("metadata")
-  .description("Validate SEO metadata for the given website")
-  .option("-w, --website <url>", "The URL of the website to crawl", validateWebsite)
-  .action((options) => {
-    const website = options.website || "";
-    validateMetadata(website);
-  });
-
-export { generateSitemap, validateSitemap, generateImages, generateMetaData, validateMetadata, generateRobots, validateRobots };
+export { generateSitemap, validateSitemap, generateImages, generateMetaTags, validateMetaTags, generateRobots, validateRobots };
 
 program.parse(process.argv);

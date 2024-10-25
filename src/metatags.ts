@@ -14,7 +14,7 @@ const appleIconPath = "/apple-touch-icon.png"; // Path to your Apple touch icon
 const filePath = "./index.html"; // Path to save the index.html file
 
 // Function to generate SEO meta tags as HTML
-export const generateMetaData = () => {
+export const generateMetaTags = () => {
   const spinner = ora(`Generating metadata`).start(); // Start the spinner
   const metaTags = [
     { name: "charset", content: "UTF-8" }, // Character encoding
@@ -73,7 +73,7 @@ export const generateMetaData = () => {
 };
 
 // Function to crawl the website and check if all required tags exist
-export const validateMetadata = async (url: string) => {
+export const validateMetaTags = async (url: string) => {
   const spinner = ora(`Validating SEO metadata for: ${url}`).start(); // Start the spinner
 // List of required meta tags
   const requiredTags = [
