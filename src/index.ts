@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
-import { readFileSync } from "fs";
 import { Command } from "commander";
 import { generateImages } from "./images.js";
 import { generateSitemap, validateSitemap } from "./sitemaps.js";
 import {generateMetaTags, validateMetaTags} from "./metatags.js";
 import { generateRobots, validateRobots } from "./robots.js";
 import { validateChangefreq, validateDepth, validateOutput, validateWebsite } from "./utils.js";
-const { name, version, description } = JSON.parse(readFileSync("./package.json", "utf8"));
+import packageJSON from "../package.json" assert { type: 'json' };
+const { name, version, description } = packageJSON;
 
 const program = new Command();
 
