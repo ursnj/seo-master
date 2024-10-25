@@ -1,4 +1,4 @@
-name: Publish Sitemaper to npm
+name: Publish SEO Master to npm
 
 on:
   workflow_dispatch:

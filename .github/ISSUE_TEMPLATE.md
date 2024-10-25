@@ -1,5 +1,5 @@
 ---
-name: Sitemaper Issue
+name: SEO Master Issue
 about: Report a bug or request a feature
 title: ""
 labels: ""
