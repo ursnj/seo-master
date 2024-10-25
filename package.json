@@ -46,13 +46,21 @@
   },
   "keywords": [
     "Sitemap Generator",
+    "Sitemap Validator",
     "Free Sitemap Generator",
     "XML Sitemap Generator",
     "Automated Sitemap Generator",
     "Website Sitemap Generator",
     "Online Sitemap Generator",
     "Easy Sitemap Generator",
-    "Simple Sitemap Generator"
+    "Simple Sitemap Generator",
+    "Robots.txt Generator",
+    "Robots.txt Validator",
+    "Meta Tags Generator",
+    "Meta Tags Validator",
+    "Favicon Generator",
+    "Website Assets Generator",
+    "Social Media Metatags"
   ],
   "bugs": {
     "url": "https://github.com/ursnj/seo-master/issues"
